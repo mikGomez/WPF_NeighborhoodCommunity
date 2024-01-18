@@ -24,5 +24,13 @@ namespace WPF_NeighborhoodCommunity
             InitializeComponent();
         }
 
+        private void Button_Save(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -20,5 +20,10 @@ namespace WPF_NeighborhoodCommunity
         {
             InitializeComponent();
         }
+        private void btnOpenNewCommunity(object sender, RoutedEventArgs e)
+        {
+            NewCommunity otherWindow = new NewCommunity();
+            otherWindow.Show();
+        }
     }
 }
