@@ -196,7 +196,7 @@ namespace WPF_NeighborhoodCommunity.ViewModel
         public void NewComunidad()
         {
             
-            String SQL = $"INSERT INTO comunidad (name,direccion, numPortales, fechaCreacion, metrosCuadrados, piscina, pisoPortero, duchas, parque, maquinasEjercicio, salaReuniones, pistaTenis, pistaPadel) VALUES ('{Name}','{Direccion}', '{NumPortales}', '{FechaCreacion.ToString("yyyy-MM-dd")}', '{MetrosCuadrados}', '{(Piscina ? 0 : 1)}', '{(PisoPortero ? 0 : 1)}', '{(Duchas ? 0 : 1)}', '{(Parque ? 0 : 1)}', '{(MaquinasEjercicio ? 0 : 1)}', '{(SalaReuniones ? 0 : 1)}', '{(PistaTenis ? 0 : 1)}', '{(PistaPadel ? 0 : 1)}');";
+            String SQL = $"INSERT INTO comunidad (name,direccion, numPortales, fechaCreacion, metrosCuadrados, piscina, pisoPortero, duchas, parque, maquinasEjercicio, salaReuniones, pistaTenis, pistaPadel) VALUES ('{Name}','{Direccion}', '{NumPortales}', '{FechaCreacion.ToString("yyyy-MM-dd")}', '{MetrosCuadrados}', '{(Piscina ? 1 : 0)}', '{(PisoPortero ? 1 : 0)}', '{(Duchas ? 1 : 0)}', '{(Parque ? 1 : 0)}', '{(MaquinasEjercicio ? 1 : 0)}', '{(SalaReuniones ? 1 : 0)}', '{(PistaTenis ? 1 : 0)}', '{(PistaPadel ? 1 : 0)}');";
             
             MySQLDataManagement.ExecuteNonQuery(SQL, cnstr);
         }
