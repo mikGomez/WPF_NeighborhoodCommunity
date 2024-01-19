@@ -31,7 +31,7 @@ namespace WPF_NeighborhoodCommunity
         private void Button_Save(object sender, RoutedEventArgs e)
         {
 
-            if (!(string.IsNullOrEmpty(modelCommunity.Direccion) || modelCommunity.NumPortales <= 0 || modelCommunity.MetrosCuadrados <= 0))
+            if (!(string.IsNullOrEmpty(modelCommunity.Direccion)|| modelCommunity.NumPortales <= 0 || modelCommunity.MetrosCuadrados <= 0))
             {
                 Community nuevaComunidad = new Community
                 {
@@ -46,7 +46,8 @@ namespace WPF_NeighborhoodCommunity
                     MaquinasEjercicio = modelCommunity.MaquinasEjercicio,
                     SalaReuniones = modelCommunity.SalaReuniones,
                     PistaTenis = modelCommunity.PistaTenis,
-                    PistaPadel = modelCommunity.PistaPadel
+                    PistaPadel = modelCommunity.PistaPadel,
+                    Name = modelCommunity.Name
 
                 };
 

@@ -17,22 +17,23 @@ namespace WPF_NeighborhoodCommunity.ViewModel
         public event PropertyChangedEventHandler? PropertyChanged;
 
         // Declaro la constante para la conexión a la BDD
-        private const String cnstr = "server=localhost;uid=miguel;pwd=miguel;database=community";
+        private const String cnstr = "server=localhost;uid=miguel;pwd=miguel;database=comunidad";
         // Modelo de la lista de registros a mostrar
         private ObservableCollection<Community> _listComunidad;
         private int _idComunidad;
+        private String _name="";
         private String _direccion = "";
         private int _numPortales;
         private DateTime _fechaCreacion;
         private decimal _metrosCuadrados;
-        private bool _piscina;
-        private bool _pisoPortero;
-        private bool _duchas;
-        private bool _parque;
-        private bool _maquinasEjercicio;
-        private bool _salaReuniones;
-        private bool _pistaTenis;
-        private bool _pistaPadel;
+        private bool _piscina = false;
+        private bool _pisoPortero = false;
+        private bool _duchas = false;
+        private bool _parque = false;
+        private bool _maquinasEjercicio = false;
+        private bool _salaReuniones = false;
+        private bool _pistaTenis = false;
+        private bool _pistaPadel = false;
         #endregion
 
         #region OBJETOS
@@ -53,6 +54,15 @@ namespace WPF_NeighborhoodCommunity.ViewModel
             {
                 _idComunidad = value;
                 OnPropertyChange("IdComunidad");
+            }
+        }
+        public String Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChange("Name");
             }
         }
 
@@ -185,14 +195,15 @@ namespace WPF_NeighborhoodCommunity.ViewModel
 
         public void NewComunidad()
         {
-            String SQL = $"INSERT INTO comunidad (direccion, numPortales, fechaCreacion, metrosCuadrados, piscina, pisoPortero, duchas, parque, maquinasEjercicio, salaReuniones, pistaTenis, pistaPadel) VALUES ('{Direccion}', '{NumPortales}', '{FechaCreacion.ToString("yyyy-MM-dd")}', '{MetrosCuadrados}', '{Piscina}', '{PisoPortero}', '{Duchas}', '{Parque}', '{MaquinasEjercicio}', '{SalaReuniones}', '{PistaTenis}', '{PistaPadel}');";
-
+            
+            String SQL = $"INSERT INTO comunidad (name,direccion, numPortales, fechaCreacion, metrosCuadrados, piscina, pisoPortero, duchas, parque, maquinasEjercicio, salaReuniones, pistaTenis, pistaPadel) VALUES ('{Name}','{Direccion}', '{NumPortales}', '{FechaCreacion.ToString("yyyy-MM-dd")}', '{MetrosCuadrados}', '{(Piscina ? 0 : 1)}', '{(PisoPortero ? 0 : 1)}', '{(Duchas ? 0 : 1)}', '{(Parque ? 0 : 1)}', '{(MaquinasEjercicio ? 0 : 1)}', '{(SalaReuniones ? 0 : 1)}', '{(PistaTenis ? 0 : 1)}', '{(PistaPadel ? 0 : 1)}');";
+            
             MySQLDataManagement.ExecuteNonQuery(SQL, cnstr);
         }
 
         public void LoadComunidades()
         {
-            String SQL = $"SELECT idcomunidad, direccion, numPortales, fechaCreacion, metrosCuadrados, piscina, pisoPortero, duchas, parque, maquinasEjercicio, salaReuniones, pistaTenis, pistaPadel FROM comunidad;";
+            String SQL = $"SELECT idcomunidad, direccion, numPortales, fechaCreacion, metrosCuadrados, piscina, pisoPortero, duchas, parque, maquinasEjercicio, salaReuniones, pistaTenis, pistaPadel,name FROM comunidad;";
             DataTable dt = MySQLDataManagement.LoadData(SQL, cnstr);
             if (ListComunidad == null)
             {
@@ -215,14 +226,15 @@ namespace WPF_NeighborhoodCommunity.ViewModel
                         NumPortales = int.Parse(i[2].ToString()),
                         FechaCreacion = DateTime.Parse(i[3].ToString()),
                         MetrosCuadrados = decimal.Parse(i[4].ToString()),
-                        Piscina = bool.Parse(i[5].ToString()),
-                        PisoPortero = bool.Parse(i[6].ToString()),
-                        Duchas = bool.Parse(i[7].ToString()),
-                        Parque = bool.Parse(i[8].ToString()),
-                        MaquinasEjercicio = bool.Parse(i[9].ToString()),
-                        SalaReuniones = bool.Parse(i[10].ToString()),
-                        PistaTenis = bool.Parse(i[11].ToString()),
-                        PistaPadel = bool.Parse(i[12].ToString())
+                        Piscina = i[5].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
+                        PisoPortero = i[6].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
+                        Duchas = i[7].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
+                        Parque = i[8].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
+                        MaquinasEjercicio = i[9].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
+                        SalaReuniones = i[10].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
+                        PistaTenis= i[11].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
+                        PistaPadel = i[12].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
+                        Name = i[13].ToString()
                     });
                 }
             }

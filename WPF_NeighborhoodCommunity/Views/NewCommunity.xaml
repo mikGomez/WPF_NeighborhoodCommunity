@@ -14,7 +14,7 @@
             <TabControl TabStripPlacement="Top" RenderTransformOrigin="0.495,0.484" Height="319" Width="652" x:Name="Control" >
                 <TabItem Header="General Community" FontSize="20">
                     <Grid Height="269" Margin="0,0,-6,0">
-                        <TextBox HorizontalAlignment="Left" Margin="161,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="311" Height="30" FontWeight="Bold" FontFamily="Bahnschrift SemiBold" FontSize="22"/>
+                        <TextBox HorizontalAlignment="Left" Margin="161,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="311" Height="30" FontWeight="Bold" FontFamily="Bahnschrift SemiBold" FontSize="22"  Text="{Binding Name}"/>
                         <TextBlock HorizontalAlignment="Left" Margin="61,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="96" Text="Address:"/>
                         <TextBlock HorizontalAlignment="Left" Margin="61,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64"><Run Language="es-es" Text="Date"/><Run Text=":"/></TextBlock>
                         <TextBlock HorizontalAlignment="Left" Margin="61,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Text="Square meter:"/>
@@ -32,14 +32,14 @@
                 <TabItem x:Name="item2"  Header="Specific Community" FontSize="20" Margin="-2,-2,0,2">
                     <Grid Margin="0,0,0,1">
                         <Button Content="Save" HorizontalAlignment="Center" Margin="0,239,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save" FontWeight="Bold" Width="82" Background="#FF050505" Foreground="#FFFAF9F9"/>
-                        <CheckBox Content="Pool" HorizontalAlignment="Left" Margin="69,88,0,0" VerticalAlignment="Top" Width="71" IsChecked="{Binding Pool}"/>
-                        <CheckBox Content="Playground area :" HorizontalAlignment="Left" Margin="69,122,0,0" VerticalAlignment="Top" Width="190" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding PlaygroundArea}"/>
-                        <CheckBox Content=" Exercise machines :" HorizontalAlignment="Left" Margin="69,153,0,0" VerticalAlignment="Top" Width="223" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding ExerciseMachines}"/>
-                        <CheckBox Content="Tennis court :" HorizontalAlignment="Left" Margin="69,184,0,0" VerticalAlignment="Top" Width="223" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding TennisCourt}"/>
-                        <CheckBox Content="Floor for the doorman :" HorizontalAlignment="Left" Margin="376,88,0,0" VerticalAlignment="Top" Width="268" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding FloorDoorman}"/>
-                        <CheckBox Content="Community showers :" HorizontalAlignment="Left" Margin="376,122,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding CommunityShowers}"/>
-                        <CheckBox Content="Meeting room :" HorizontalAlignment="Left" Margin="376,153,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding MeetingRoom}"/>
-                        <CheckBox Content="Paddle court :" HorizontalAlignment="Left" Margin="376,184,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26" FontSize="20" IsChecked="{Binding PaddleCourt}"/>
+                        <CheckBox Content="Pool" HorizontalAlignment="Left" Margin="69,88,0,0" VerticalAlignment="Top" Width="71" IsChecked="{Binding Piscina}"/>
+                        <CheckBox Content="Playground area :" HorizontalAlignment="Left" Margin="69,122,0,0" VerticalAlignment="Top" Width="190" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding Parque}"/>
+                        <CheckBox Content=" Exercise machines :" HorizontalAlignment="Left" Margin="69,153,0,0" VerticalAlignment="Top" Width="223" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding MaquinasEjercicio}"/>
+                        <CheckBox Content="Tennis court :" HorizontalAlignment="Left" Margin="69,184,0,0" VerticalAlignment="Top" Width="223" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding PistaTenis}"/>
+                        <CheckBox Content="Floor for the doorman :" HorizontalAlignment="Left" Margin="376,88,0,0" VerticalAlignment="Top" Width="268" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding PisoPortero}"/>
+                        <CheckBox Content="Community showers :" HorizontalAlignment="Left" Margin="376,122,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding Duchas}"/>
+                        <CheckBox Content="Meeting room :" HorizontalAlignment="Left" Margin="376,153,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding SalaReuniones}"/>
+                        <CheckBox Content="Paddle court :" HorizontalAlignment="Left" Margin="376,184,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26" FontSize="20" IsChecked="{Binding PistaPadel}"/>
                         <Label Content="COMMUNITY " HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Height="55" Width="216" FontFamily="Bahnschrift SemiBold" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
                     </Grid>
                 </TabItem>
