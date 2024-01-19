@@ -20,10 +20,10 @@
                         <TextBlock HorizontalAlignment="Left" Margin="61,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Text="Square meter:"/>
                         <TextBlock HorizontalAlignment="Left" Margin="340,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103"><Run Text="Nº"/><Run Language="es-es" Text=" "/><Run Text="Portals:"/></TextBlock>
                         <TextBox HorizontalAlignment="Left" Margin="162,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" />
-                        <TextBox HorizontalAlignment="Left" Margin="448,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85"/>
-                        <DatePicker HorizontalAlignment="Left" Margin="140,143,0,0" VerticalAlignment="Top"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="60,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66"><Run Language="es-es" Text="Name"/><Run Text=":"/></TextBlock>
-                        <TextBox HorizontalAlignment="Left" Margin="207,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="42"/>
+                        <TextBox HorizontalAlignment="Left" Margin="448,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85"  Text="{Binding NumPortales}"/>
+                        <DatePicker HorizontalAlignment="Left" Margin="140,143,0,0" VerticalAlignment="Top" SelectedDate="{Binding FechaCreacion}"/>
+                        <TextBox HorizontalAlignment="Left" Margin="162,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" Text="{Binding Direccion}"/>
+                        <TextBox HorizontalAlignment="Left" Margin="186,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63" Text="{Binding MetrosCuadrados}" Height="27"/>
                         <TextBlock HorizontalAlignment="Left" Margin="254,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" Height="29"><Run Language="es-es" Text="m2"/></TextBlock>
                         <Label Content="COMMUNITY " HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Height="55" Width="216" FontFamily="Bahnschrift SemiBold" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
                         <Button Content="Next" HorizontalAlignment="Center" Margin="0,241,0,0" VerticalAlignment="Top" Background="#FF050505" Foreground="#FFFAF9F9" Width="84"/>
@@ -32,16 +32,15 @@
                 <TabItem x:Name="item2"  Header="Specific Community" FontSize="20" Margin="-2,-2,0,2">
                     <Grid Margin="0,0,0,1">
                         <Button Content="Save" HorizontalAlignment="Center" Margin="0,239,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save" FontWeight="Bold" Width="82" Background="#FF050505" Foreground="#FFFAF9F9"/>
-                        <CheckBox Content="Pool" HorizontalAlignment="Left" Margin="69,88,0,0" VerticalAlignment="Top" Width="71"/>
-                        <CheckBox Content="Playground area :" HorizontalAlignment="Left" Margin="69,122,0,0" VerticalAlignment="Top" Width="190" Checked="CheckBox_Checked" Height="26"/>
-                        <CheckBox Content=" Exercise machines :" HorizontalAlignment="Left" Margin="69,153,0,0" VerticalAlignment="Top" Width="223" Checked="CheckBox_Checked" Height="26"/>
-                        <CheckBox Content="Tennis court :" HorizontalAlignment="Left" Margin="69,184,0,0" VerticalAlignment="Top" Width="223" Checked="CheckBox_Checked" Height="26"/>
-                        <CheckBox Content="Floor for the doorman :" HorizontalAlignment="Left" Margin="376,88,0,0" VerticalAlignment="Top" Width="268" Checked="CheckBox_Checked" Height="26"/>
-                        <CheckBox Content="Community showers :" HorizontalAlignment="Left" Margin="376,122,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26"/>
-                        <CheckBox Content="Meeting room :" HorizontalAlignment="Left" Margin="376,153,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26"/>
-                        <CheckBox Content="Paddle court :" HorizontalAlignment="Left" Margin="376,184,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26" FontSize="20"/>
+                        <CheckBox Content="Pool" HorizontalAlignment="Left" Margin="69,88,0,0" VerticalAlignment="Top" Width="71" IsChecked="{Binding Pool}"/>
+                        <CheckBox Content="Playground area :" HorizontalAlignment="Left" Margin="69,122,0,0" VerticalAlignment="Top" Width="190" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding PlaygroundArea}"/>
+                        <CheckBox Content=" Exercise machines :" HorizontalAlignment="Left" Margin="69,153,0,0" VerticalAlignment="Top" Width="223" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding ExerciseMachines}"/>
+                        <CheckBox Content="Tennis court :" HorizontalAlignment="Left" Margin="69,184,0,0" VerticalAlignment="Top" Width="223" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding TennisCourt}"/>
+                        <CheckBox Content="Floor for the doorman :" HorizontalAlignment="Left" Margin="376,88,0,0" VerticalAlignment="Top" Width="268" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding FloorDoorman}"/>
+                        <CheckBox Content="Community showers :" HorizontalAlignment="Left" Margin="376,122,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding CommunityShowers}"/>
+                        <CheckBox Content="Meeting room :" HorizontalAlignment="Left" Margin="376,153,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26" IsChecked="{Binding MeetingRoom}"/>
+                        <CheckBox Content="Paddle court :" HorizontalAlignment="Left" Margin="376,184,0,0" VerticalAlignment="Top" Width="216" Checked="CheckBox_Checked" Height="26" FontSize="20" IsChecked="{Binding PaddleCourt}"/>
                         <Label Content="COMMUNITY " HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Height="55" Width="216" FontFamily="Bahnschrift SemiBold" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
-
                     </Grid>
                 </TabItem>
             </TabControl>
