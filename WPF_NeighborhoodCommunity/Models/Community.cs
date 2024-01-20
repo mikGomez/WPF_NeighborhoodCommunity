@@ -19,9 +19,9 @@ namespace WPF_NeighborhoodCommunity.Models
         private int _idComunidad;
         private String _name = "";
         private String _direccion = "";
-        private int _numPortales;
-        private DateTime _fechaCreacion;
-        private decimal _metrosCuadrados;
+        private int _numPortales = 0;
+        private DateTime _fechaCreacion = DateTime.Now;
+        private decimal _metrosCuadrados = 0;
         private bool _piscina = false;
         private bool _pisoPortero = false;
         private bool _duchas = false;

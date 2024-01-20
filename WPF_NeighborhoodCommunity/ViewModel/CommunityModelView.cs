@@ -17,15 +17,15 @@ namespace WPF_NeighborhoodCommunity.ViewModel
         public event PropertyChangedEventHandler? PropertyChanged;
 
         // Declaro la constante para la conexión a la BDD
-        private const String cnstr = "server=localhost;uid=miguel;pwd=miguel;database=comunidad";
+        private const String cnstr = "server=localhost;uid=miguel;pwd=miguel;database=community";
         // Modelo de la lista de registros a mostrar
         private ObservableCollection<Community> _listComunidad;
         private int _idComunidad;
         private String _name="";
         private String _direccion = "";
-        private int _numPortales;
-        private DateTime _fechaCreacion;
-        private decimal _metrosCuadrados;
+        private int _numPortales= 0;
+        private DateTime _fechaCreacion = DateTime.Now;
+        private decimal _metrosCuadrados = 0;
         private bool _piscina = false;
         private bool _pisoPortero = false;
         private bool _duchas = false;
@@ -198,6 +198,27 @@ namespace WPF_NeighborhoodCommunity.ViewModel
             
             String SQL = $"INSERT INTO comunidad (name,direccion, numPortales, fechaCreacion, metrosCuadrados, piscina, pisoPortero, duchas, parque, maquinasEjercicio, salaReuniones, pistaTenis, pistaPadel) VALUES ('{Name}','{Direccion}', '{NumPortales}', '{FechaCreacion.ToString("yyyy-MM-dd")}', '{MetrosCuadrados}', '{(Piscina ? 1 : 0)}', '{(PisoPortero ? 1 : 0)}', '{(Duchas ? 1 : 0)}', '{(Parque ? 1 : 0)}', '{(MaquinasEjercicio ? 1 : 0)}', '{(SalaReuniones ? 1 : 0)}', '{(PistaTenis ? 1 : 0)}', '{(PistaPadel ? 1 : 0)}');";
             
+            MySQLDataManagement.ExecuteNonQuery(SQL, cnstr);
+        }
+
+        public void UpdateCommunity()
+        {
+            String SQL = $"UPDATE comunidad SET " +
+                         $"direccion = '{Direccion}', " +
+                         $"numPortales = '{NumPortales}', " +
+                         $"fechaCreacion = '{FechaCreacion.ToString("yyyy-MM-dd")}', " +
+                         $"metrosCuadrados = '{MetrosCuadrados}', " +
+                         $"piscina = '{(Piscina ? 1 : 0)}', " +
+                         $"pisoPortero = '{(PisoPortero ? 1 : 0)}', " +
+                         $"duchas = '{(Duchas ? 1 : 0)}', " +
+                         $"parque = '{(Parque ? 1 : 0)}', " +
+                         $"maquinasEjercicio = '{(MaquinasEjercicio ? 1 : 0)}', " +
+                         $"salaReuniones = '{(SalaReuniones ? 1 : 0)}', " +
+                         $"pistaTenis = '{(PistaTenis ? 1 : 0)}', " +
+                         $"pistaPadel = '{(PistaPadel ? 1 : 0)}' " +
+                         $"WHERE name = '{Name}';";
+
+            // Ejecutar la consulta de actualización
             MySQLDataManagement.ExecuteNonQuery(SQL, cnstr);
         }
 
