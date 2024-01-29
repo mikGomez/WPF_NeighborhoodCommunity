@@ -32,6 +32,19 @@ namespace WPF_NeighborhoodCommunity.DB
             con.Close();
             return dt;
         }
+
+        public static object ExecuteScalar(string SQL, string cnstr)
+        {      
+                using (MySqlConnection con = new MySqlConnection(cnstr))
+                {
+                    con.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand(SQL, con))
+                    {
+                        return cmd.ExecuteScalar();
+                    }
+                }
+        }
     }
 }
 

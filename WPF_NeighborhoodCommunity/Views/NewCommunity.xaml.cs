@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using WPF_NeighborhoodCommunity.Models;
 using WPF_NeighborhoodCommunity.ViewModel;
+using WPF_NeighborhoodCommunity.Views;
 
 namespace WPF_NeighborhoodCommunity
 {
@@ -98,13 +99,9 @@ namespace WPF_NeighborhoodCommunity
                     modelCommunity.NewComunidad();
 
                     MessageBox.Show("Guardado correctamente!", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-
-                nombre.Text = "";
-                direccion.Text = "";
-                portal.Text = "0";
-                metros.Text = "0";
-                
+                    CommunityPortal otherWindow = new CommunityPortal(modelCommunity.Name,modelCommunity.NumPortales);
+                    otherWindow.Show();
+                }           
             }
         }
     }
