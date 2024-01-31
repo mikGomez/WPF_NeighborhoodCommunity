@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WPF_NeighborhoodCommunity.Models
 {
-    internal class Portal
+    internal class Portal : INotifyPropertyChanged
     {
         #region VARIABLES
         public event PropertyChangedEventHandler? PropertyChanged;

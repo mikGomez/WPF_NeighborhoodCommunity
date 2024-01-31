@@ -10,7 +10,7 @@ using WPF_NeighborhoodCommunity.DB;
 
 namespace WPF_NeighborhoodCommunity.Models
 {
-    internal class Community
+    internal class Community : INotifyPropertyChanged
     {
         #region VARIABLES
         public event PropertyChangedEventHandler? PropertyChanged;

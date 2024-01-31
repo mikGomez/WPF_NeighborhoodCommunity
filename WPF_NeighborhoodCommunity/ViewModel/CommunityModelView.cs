@@ -11,14 +11,12 @@ using WPF_NeighborhoodCommunity.DB;
 
 namespace WPF_NeighborhoodCommunity.ViewModel
 {
-    internal class CommunityModelView
+    internal class CommunityModelView : INotifyPropertyChanged
     {
         #region VARIABLES
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        // Declaro la constante para la conexión a la BDD
         private const String cnstr = "server=localhost;uid=miguel;pwd=miguel;database=community";
-        // Modelo de la lista de registros a mostrar
         private ObservableCollection<Community> _listComunidad;
         private int _idComunidad;
         private String _name="";

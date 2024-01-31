@@ -23,7 +23,9 @@ namespace WPF_NeighborhoodCommunity.Views
         private StairsModelView modelStairsCommunity = new StairsModelView();
         int numStairsRestantes;
         int idStair = 0;
-        public CommunityStairs(int idP, int numEscalerasTotales)
+        private CommunityPortal portalWindow;
+
+        public CommunityStairs(int idP, int numEscalerasTotales, CommunityPortal portalWindow)
         {
             DataContext = modelStairsCommunity;
             modelStairsCommunity.loadStairs();
@@ -31,23 +33,24 @@ namespace WPF_NeighborhoodCommunity.Views
             modelStairsCommunity.IdPortal = idP;
             numStairsRestantes = numEscalerasTotales;
             contador.Text = numStairsRestantes.ToString();
-
+            this.portalWindow = portalWindow;   
         }
+
         private void Button_stairs(object sender, RoutedEventArgs e)
         {
 
             if (numStairsRestantes > 0)
             {
+                this.Hide();
                 CreateStairs();
 
-                CommunityFloor otherWindow = new CommunityFloor(idStair,modelStairsCommunity.NumPlantas);
+                CommunityFloor otherWindow = new CommunityFloor(idStair,modelStairsCommunity.NumPlantas,this, portalWindow,numStairsRestantes);
                 otherWindow.Show();
                 numStairsRestantes--;
                 contador.Text = numStairsRestantes.ToString();
 
                 if (numStairsRestantes <= 0)
                 {
-                    this.Close();
                     save.IsEnabled = false;
                 }
             }

@@ -11,14 +11,13 @@ using WPF_NeighborhoodCommunity.Models;
 
 namespace WPF_NeighborhoodCommunity.ViewModel
 {
-    internal class StairsModelView
+    internal class StairsModelView : INotifyPropertyChanged
     {
         #region VARIABLES
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        // Declaro la constante para la conexión a la BDD
+
         private const String cnstr = "server=localhost;uid=miguel;pwd=miguel;database=community";
-        // Modelo de la lista de registros a mostrar
         private ObservableCollection<Stair> _listEscaleras;
         private int _idEscalera;
         private int _numPlantas;
@@ -78,7 +77,6 @@ namespace WPF_NeighborhoodCommunity.ViewModel
         }
         #endregion
 
-        // Método que se encarga de actualizar las propiedades en cada cambio
         private void OnPropertyChange(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -40,10 +40,11 @@ namespace WPF_NeighborhoodCommunity.Views
         {
             if (numPortalesRestantes > 0)
             {
+                this.Hide();
                 CreatePortal();
-
-                CommunityStairs otherWindow = new CommunityStairs(idP, modelportalCommunity.NumEscaleras);
+                CommunityStairs otherWindow = new CommunityStairs(idP, modelportalCommunity.NumEscaleras,this);
                 otherWindow.Show();
+                
                 numPortalesRestantes--;
                 contador.Text = numPortalesRestantes.ToString();
 

@@ -8,10 +8,10 @@
         Title="CommunityFloor" Height="450" Width="800">
     <Grid>
         <Button Name="save"  Content="Save floor" Click="Button_floor" HorizontalAlignment="Left" Margin="326,299,0,0" VerticalAlignment="Top" Background="#FF050505" Foreground="#FFFAF9F9" Width="101" Height="38"/>
-        <TextBlock HorizontalAlignment="Left" Margin="88,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="97"><Run Text="Nº Planta: "/></TextBlock>
-        <TextBox HorizontalAlignment="Left" Margin="224,134,0,0" TextWrapping="Wrap" Text="{Binding NumPlanta, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="88,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="97"><Run Text="Nº Letras: "/></TextBlock>
-        <TextBox HorizontalAlignment="Left" Margin="224,178,0,0" TextWrapping="Wrap" Text="{Binding NumLetras, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="88,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="126"><Run Text="Nº Planta identificativo: "/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Margin="280,134,0,0" TextWrapping="Wrap" Text="{Binding NumPlanta, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="88,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="160"><Run Text="Nº Letras que tiene la planta: "/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Margin="280,176,0,0" TextWrapping="Wrap" Text="{Binding NumLetras, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="88,51,0,0" TextWrapping="Wrap" Text="Nº plantas por crear: " VerticalAlignment="Top" Height="19" Width="126"/>
         <TextBlock Name="contador" HorizontalAlignment="Left" Margin="248,51,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Height="19" Width="36"/>
 

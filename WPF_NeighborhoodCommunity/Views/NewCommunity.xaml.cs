@@ -101,6 +101,7 @@ namespace WPF_NeighborhoodCommunity
                     MessageBox.Show("Guardado correctamente!", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
                     CommunityPortal otherWindow = new CommunityPortal(modelCommunity.Name,modelCommunity.NumPortales);
                     otherWindow.Show();
+                    this.Close();
                 }           
             }
         }

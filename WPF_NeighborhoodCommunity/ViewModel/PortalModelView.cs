@@ -11,14 +11,12 @@ using WPF_NeighborhoodCommunity.Models;
 
 namespace WPF_NeighborhoodCommunity.ViewModel
 {
-    internal class PortalModelView
+    internal class PortalModelView : INotifyPropertyChanged
     {
         #region VARIABLES
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        // Declaro la constante para la conexión a la BDD
         private const String cnstr = "server=localhost;uid=miguel;pwd=miguel;database=community";
-        // Modelo de la lista de registros a mostrar
         private ObservableCollection<Portal> _listPortales;
         private int _idPortal;
         private int _numEscaleras;
@@ -77,7 +75,6 @@ namespace WPF_NeighborhoodCommunity.ViewModel
         }
         #endregion
 
-        // Método que se encarga de actualizar las propiedades en cada cambio
         private void OnPropertyChange(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

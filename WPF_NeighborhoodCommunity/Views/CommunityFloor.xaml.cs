@@ -22,7 +22,10 @@ namespace WPF_NeighborhoodCommunity.Views
         private FloorModelView modelFloorCommunity = new FloorModelView();
         int numFloorRestantes;
         int idPlan = 0;
-        public CommunityFloor(int idP, int numPlantasTotales)
+        private CommunityStairs stairsWindow;
+        private CommunityPortal portal;
+        private int numStairsRestantes;
+        public CommunityFloor(int idP, int numPlantasTotales, CommunityStairs stairsWindow, CommunityPortal portal, int numStairsRestantes)
         {
             DataContext = modelFloorCommunity;
             modelFloorCommunity.LoadFloor();
@@ -30,22 +33,29 @@ namespace WPF_NeighborhoodCommunity.Views
             modelFloorCommunity.IdEscalera = idP;
             numFloorRestantes = numPlantasTotales;
             contador.Text = numFloorRestantes.ToString();
+            this.stairsWindow = stairsWindow;
+            this.portal = portal;
+            this.numStairsRestantes = numStairsRestantes;
         }
         private void Button_floor(object sender, RoutedEventArgs e)
         {
             if (numFloorRestantes > 0)
             {
                 Createfloor();
-
-                //CommunityFloor otherWindow = new CommunityFloor(idStair, modelStairsCommunity.NumPlantas);
-                //otherWindow.Show();
+                //communityportal otherwindow = new communityportal();
+                //otherwindow.show();
                 numFloorRestantes--;
                 contador.Text = numFloorRestantes.ToString();
 
-                if (numFloorRestantes <= 0)
+                if (numFloorRestantes <= 0 && numStairsRestantes > 1)
                 {
+                    stairsWindow.Show();
                     this.Close();
                     save.IsEnabled = false;
+                } else if (numFloorRestantes <= 0 && numStairsRestantes <= 1) { 
+                    stairsWindow.Close();
+                    this.Close();
+                    portal.Show();
                 }
             }
             else
