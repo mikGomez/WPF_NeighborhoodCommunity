@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,22 +16,23 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using WPF_NeighborhoodCommunity.Models;
 using WPF_NeighborhoodCommunity.ViewModel;
-using WPF_NeighborhoodCommunity.Views;
 
 namespace WPF_NeighborhoodCommunity
 {
-   
+
     public partial class NewCommunity : Window
     {
         private CommunityModelView modelCommunity = new CommunityModelView();
+        private PortalModelView modelportalCommunity = new PortalModelView();
         public NewCommunity()
         {
             InitializeComponent();
             DataContext = modelCommunity;
             modelCommunity.LoadComunidades();
         }
-        private void Button_Next(object sender, RoutedEventArgs e) {
-           
+        private void Button_Next(object sender, RoutedEventArgs e)
+        {
+
             if (string.IsNullOrWhiteSpace(modelCommunity.Name)
                 || string.IsNullOrWhiteSpace(modelCommunity.Direccion)
                 || modelCommunity.FechaCreacion == null
@@ -39,7 +41,8 @@ namespace WPF_NeighborhoodCommunity
             {
                 MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else {
+            else
+            {
                 SpecificCommunity.IsEnabled = true;
                 Control.SelectedIndex = 1;
             }
@@ -48,7 +51,7 @@ namespace WPF_NeighborhoodCommunity
 
         private void Button_Save(object sender, RoutedEventArgs e)
         {
-            if (!(string.IsNullOrEmpty(modelCommunity.Direccion)|| modelCommunity.NumPortales <= 0 || modelCommunity.MetrosCuadrados <= 0))
+            if (!(string.IsNullOrEmpty(modelCommunity.Direccion) || modelCommunity.NumPortales <= 0 || modelCommunity.MetrosCuadrados <= 0))
             {
                 Community communityExist = modelCommunity.ListComunidad.FirstOrDefault(c => c.Name == modelCommunity.Name);
 
@@ -99,10 +102,57 @@ namespace WPF_NeighborhoodCommunity
                     modelCommunity.NewComunidad();
 
                     MessageBox.Show("Guardado correctamente!", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    CommunityPortal otherWindow = new CommunityPortal(modelCommunity.Name,modelCommunity.NumPortales);
-                    otherWindow.Show();
-                    this.Close();
-                }           
+                    Portal.IsEnabled = true;
+                    ComboBoxPortal();
+                    DataContext = modelportalCommunity;
+                    Control.SelectedIndex = 2;
+                }
+            }
+        }
+        private void Button_Save_portal(object sender, RoutedEventArgs e)
+        {
+            CreatePortal();
+        }
+        private void CreatePortal()
+        {
+            int idComun = modelportalCommunity.GetIdComunidadByName(modelCommunity.Name);
+            modelportalCommunity.IdComunidad = idComun;
+            for (int i = 1; i < modelCommunity.NumPortales; i++)
+            {
+                Portal portal = new Portal
+                {
+                    IdComunidad = modelportalCommunity.IdComunidad,
+                    NumEscaleras = modelportalCommunity.NumEscaleras,
+                    NumPortal = modelportalCommunity.NumPortal
+                };
+                if (modelportalCommunity.ListPortales == null)
+                {
+                    modelportalCommunity.ListPortales = new ObservableCollection<Portal>();
+                }
+                modelportalCommunity.ListPortales.Add(portal);
+                modelportalCommunity.NewPortal();
+            }
+   
+        }
+        private void ComboBoxPortal()
+        {
+            comboBoxPortales.Items.Clear();
+
+            List<string> portalNames = new List<string>();
+
+            for (int i = 1; i <= modelCommunity.NumPortales; i++)
+            {
+                portalNames.Add("Portal " + i);
+            }
+            comboBoxPortales.ItemsSource = portalNames;
+        }
+        private void ComboBoxPortalesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboBoxPortales.SelectedItem != null)
+            {
+                txtEcs.Visibility = Visibility.Visible;
+                txtEsca.Visibility = Visibility.Visible;
+                comboBoxPortales.IsEnabled = false;
             }
         }
     }
