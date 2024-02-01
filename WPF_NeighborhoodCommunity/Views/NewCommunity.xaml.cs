@@ -132,7 +132,7 @@ namespace WPF_NeighborhoodCommunity
                 modelportalCommunity.ListPortales.Add(portal);
                 modelportalCommunity.NewPortal();
             }
-   
+
         }
         private void ComboBoxPortal()
         {
@@ -155,5 +155,33 @@ namespace WPF_NeighborhoodCommunity
                 comboBoxPortales.IsEnabled = false;
             }
         }
+        private void Button_Save_escalera(object sender, RoutedEventArgs e)
+        {
+            //CreateEscalera();
+        }
+
+        private void CreateEscalera()
+        {
+
+        }
+
+        private void ComboBoxEscaleraChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        private void Button_Save_planta(object sender, RoutedEventArgs e)
+        {
+            //CreatePlanta();
+        }
+
+        private void CreatePlanta()
+        {
+
+        }
+        private void ComboBoxPlantaChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        
     }
 }
