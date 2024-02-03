@@ -32,6 +32,9 @@ namespace WPF_NeighborhoodCommunity
         private int idPortal = 0;
         private int idStair = 0;
         private int idFloor = 0;
+        List<string> plantaNames = new List<string>();
+        List<string> escaleraNames = new List<string>();
+        List<string> portalNames = new List<string>();
         public NewCommunity()
         {
             InitializeComponent();
@@ -151,26 +154,24 @@ namespace WPF_NeighborhoodCommunity
 
         private void ComboBoxPortal()
         {
-            int selectedIndex = comboBoxPortales.SelectedIndex;
+            if (portalNames.Count <= 0) {
+                for (int i = 1; i <= modelCommunity.NumPortales; i++)
+                {
+                    portalNames.Add("Portal " + i);
+                }
+            }
+            
+
+            // Elimina la opción seleccionada previamente
+            if (comboBoxPortales.SelectedIndex != -1)
+            {
+                portalNames.RemoveAt(comboBoxPortales.SelectedIndex);
+            }
 
             comboBoxPortales.ItemsSource = null;
             comboBoxPortales.Items.Clear();
 
-            List<string> portalNames = new List<string>();
-
-            for (int i = 1; i <= modelCommunity.NumPortales; i++)
-            {
-                portalNames.Add("Portal " + i);
-            }
-
-            // Elimina la opción seleccionada previamente
-            if (selectedIndex != -1)
-            {
-                portalNames.RemoveAt(selectedIndex);
-            }
-
             comboBoxPortales.ItemsSource = portalNames;
-
             comboBoxPortales.SelectedIndex = -1;
 
         }
@@ -189,28 +190,24 @@ namespace WPF_NeighborhoodCommunity
         }
         private void ComboBoxEscalera()
         {
-            int selectedIndex = comboBoxEscalera.SelectedIndex;
+            if(escaleraNames.Count <= 0)
+            {
+                for (int i = 1; i <= modelportalCommunity.NumEscaleras; i++)
+                {
+                    escaleraNames.Add("Escalera " + i);
+                }
+            }
+            // Elimina la opción seleccionada previamente
+            if (comboBoxEscalera.SelectedIndex != -1)
+            {
+                escaleraNames.RemoveAt(comboBoxEscalera.SelectedIndex);
+            }
 
             comboBoxEscalera.ItemsSource = null;
             comboBoxEscalera.Items.Clear();
 
-            List<string> escaleraNames = new List<string>();
-
-            for (int i = 1; i <= modelportalCommunity.NumEscaleras; i++)
-            {
-                escaleraNames.Add("Escalera " + i);
-            }
-
-            // Elimina la opción seleccionada previamente
-            if (selectedIndex != -1)
-            {
-                escaleraNames.RemoveAt(selectedIndex);
-            }
-
             comboBoxEscalera.ItemsSource = escaleraNames;
-
             comboBoxEscalera.SelectedIndex = -1;
-
         }
 
 
@@ -255,12 +252,14 @@ namespace WPF_NeighborhoodCommunity
         }
         private void ComboBoxPlanta()
         {
-            List<string> plantaNames = new List<string>();
-
-            for (int i = 1; i <= modelstairCommunity.NumPlantas; i++)
+            if (plantaNames.Count <= 0)
             {
-                plantaNames.Add("Planta " + i);
+                for (int i = 1; i <= modelstairCommunity.NumPlantas; i++)
+                {
+                    plantaNames.Add("Planta " + i);
+                }
             }
+            
 
             // Elimina la opción seleccionada previamente
             if (comboBoxPlantas.SelectedIndex != -1)
@@ -274,6 +273,7 @@ namespace WPF_NeighborhoodCommunity
             comboBoxPlantas.ItemsSource = plantaNames;
             comboBoxPlantas.SelectedIndex = -1;
         }
+
 
         private void Button_Save_planta(object sender, RoutedEventArgs e)
         {
@@ -296,7 +296,7 @@ namespace WPF_NeighborhoodCommunity
                     txtPlant.Visibility = Visibility.Collapsed;
                     comboBoxEscalera.Visibility = Visibility.Collapsed;
                     comboBoxPortales.IsEnabled = true;
-                    DataContext = modelstairCommunity;
+                    DataContext = modelportalCommunity;
                     ComboBoxPortal();
                     contStair = 1;
                     if (contPortal > modelCommunity.NumPortales)
