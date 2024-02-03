@@ -133,8 +133,8 @@ namespace WPF_NeighborhoodCommunity
         {
             int idComun = modelportalCommunity.GetIdComunidadByName(modelCommunity.Name);
             modelportalCommunity.IdComunidad = idComun;
-                modelportalCommunity.NumPortal= contPortal;
-                Portal portal = new Portal
+            modelportalCommunity.NumPortal = ObtenerNumeroDesdeComboBox(comboBoxPortales);
+            Portal portal = new Portal
                 {
                     IdComunidad = modelportalCommunity.IdComunidad,
                     NumEscaleras = modelportalCommunity.NumEscaleras,
@@ -171,12 +171,8 @@ namespace WPF_NeighborhoodCommunity
 
             comboBoxPortales.ItemsSource = portalNames;
 
-            // Restablece la selección a ningún índice
             comboBoxPortales.SelectedIndex = -1;
 
-            // Imprime información de depuración
-            Console.WriteLine("SelectedIndex: " + selectedIndex);
-            Console.WriteLine("NumPortales: " + modelCommunity.NumPortales);
         }
 
 
@@ -213,12 +209,8 @@ namespace WPF_NeighborhoodCommunity
 
             comboBoxEscalera.ItemsSource = escaleraNames;
 
-            // Restablece la selección a ningún índice
             comboBoxEscalera.SelectedIndex = -1;
 
-            // Imprime información de depuración
-            Console.WriteLine("SelectedIndex: " + selectedIndex);
-            Console.WriteLine("NumEscaleras: " + modelportalCommunity.NumEscaleras);
         }
 
 
@@ -233,7 +225,7 @@ namespace WPF_NeighborhoodCommunity
 
         private void CreateEscalera()
         {
-            modelstairCommunity.NumEscalera = contStair;
+            modelstairCommunity.NumEscalera = ObtenerNumeroDesdeComboBox(comboBoxEscalera);
             modelstairCommunity.IdPortal = idPortal;
             Stair escalera = new Stair
             {
@@ -312,6 +304,7 @@ namespace WPF_NeighborhoodCommunity
                         DataContext = modelportalCommunity;
                         comboBoxPortales.Visibility = Visibility.Collapsed;
                         txtEcs.Visibility = Visibility.Collapsed;
+                        txtEsca.Visibility = Visibility.Collapsed;
                     }
                 }
 
@@ -322,7 +315,7 @@ namespace WPF_NeighborhoodCommunity
         private void CreatePlanta()
         {
             modelfloorCommunity.IdEscalera = idStair;
-            modelfloorCommunity.NumPlanta = contFloor;
+            modelfloorCommunity.NumPlanta = ObtenerNumeroDesdeComboBox(comboBoxPlantas);
 
             Floor escalera = new Floor
             {
@@ -349,6 +342,29 @@ namespace WPF_NeighborhoodCommunity
                 savePlanta.Visibility = Visibility.Visible;
             }
         }
-        
+        private int ObtenerNumeroDesdeComboBox(ComboBox comboBox)
+        {
+            if (comboBox.SelectedItem != null)
+            {
+                string selectedItemString = comboBox.SelectedItem.ToString();
+
+                // Quitamos todo lo anterior al espacio en blanco y nos quedamos con el número, lo pasamos a int y ya tendriamos el numPortal
+                int numeroExtraido;
+                if (int.TryParse(selectedItemString.Split(' ')[1], out numeroExtraido))
+                {
+                    return numeroExtraido;
+                }
+                else
+                {
+                    throw new InvalidOperationException("No se pudo extraer el número del ComboBox.");
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException("No hay nada seleccionado en el ComboBox.");
+            }
+        }
+
+
     }
 }
