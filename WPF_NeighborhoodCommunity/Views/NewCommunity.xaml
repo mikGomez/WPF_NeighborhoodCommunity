@@ -51,17 +51,17 @@
                 <TabItem x:Name="Portal"  Header="Portal" IsEnabled="False" FontSize="20" Margin="-2,-2,0,2">
                     <Grid Margin="0,0,0,1" RenderTransformOrigin="0.479,0.468">
                         <ComboBox x:Name="comboBoxPortales" SelectionChanged="ComboBoxPortalesChanged" Margin="41,10,455,240"/>
-                        <TextBlock Visibility="Collapsed" Name="txtEcs" HorizontalAlignment="Left" Margin="41,50,0,0" TextWrapping="Wrap" Text="Nº Escaleras que tiene el portal:" VerticalAlignment="Top" Height="24" Width="282"/>
+                        <TextBlock Visibility="Collapsed"  Name="txtEcs" HorizontalAlignment="Left" Margin="41,50,0,0" TextWrapping="Wrap" Text="Nº Escaleras que tiene el portal:" VerticalAlignment="Top" Height="24" Width="282"/>
                         <TextBox Visibility="Collapsed" x:Name="txtEsca" HorizontalAlignment="Left" Margin="328,50,0,0" TextWrapping="Wrap" Text="{Binding NumEscaleras, Mode=TwoWay}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.507,0.428"/>
                         <ComboBox Visibility="Collapsed" SelectionChanged="ComboBoxEscaleraChanged" x:Name="comboBoxEscalera"  Margin="80,82,416,167" />
-                        <TextBlock x:Name="txtPlan" Visibility="Collapsed" HorizontalAlignment="Left" Margin="80,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="224" Text="Nº Plantas de la escalera:"></TextBlock>
+                        <TextBlock x:Name="txtPlan" Visibility="Collapsed"  HorizontalAlignment="Left" Margin="80,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="224" Text="Nº Plantas de la escalera:"></TextBlock>
                         <TextBox x:Name="txtPlant" Visibility="Collapsed" HorizontalAlignment="Left" Margin="309,0,0,0" TextWrapping="Wrap" Text="{Binding NumPlantas, Mode=TwoWay}" VerticalAlignment="Center" Width="120" RenderTransformOrigin="0.503,0.57"/>
-                        <ComboBox Visibility="Collapsed" SelectionChanged="ComboBoxPlantaChanged" x:Name="comboBoxPlantas" DisplayMemberPath="Nombre" SelectedValuePath="Nombre" Margin="117,158,379,92" />
-                        <TextBlock Visibility="Collapsed" x:Name="txtPiso" HorizontalAlignment="Left" Margin="117,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="271"><Run Text="Nº Letras que tiene la planta: "/></TextBlock>
+                        <ComboBox Visibility="Collapsed" SelectionChanged="ComboBoxPlantaChanged" x:Name="comboBoxPlantas" Margin="117,158,379,92" />
+                        <TextBlock Visibility="Collapsed"  x:Name="txtPiso" HorizontalAlignment="Left" Margin="117,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="271"><Run Text="Nº Letras que tiene la planta: "/></TextBlock>
                         <TextBox Visibility="Collapsed" x:Name="txtPisoss"  HorizontalAlignment="Left" Margin="388,203,0,0" TextWrapping="Wrap" Text="{Binding NumLetras, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
-                        <Button x:Name="savePortal" Content="Save" HorizontalAlignment="Left" Margin="255,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_portal" FontWeight="Bold" Width="82" Background="#FF050505" Foreground="#FFFAF9F9"/>
-                        <Button x:Name="saveEscalera" Content="Save" HorizontalAlignment="Left" Margin="270,228,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_escalera" FontWeight="Bold" Width="82" Background="#FF050505" Foreground="#FFFAF9F9"/>
-                        <Button x:Name="savePlanta" Content="Save" HorizontalAlignment="Left" Margin="270,165,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_planta" FontWeight="Bold" Width="82" Background="#FF050505" Foreground="#FFFAF9F9"/>
+                        <Button Visibility="Collapsed"  x:Name="savePortal" Content="Save Portal" HorizontalAlignment="Center" Margin="0,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_portal" FontWeight="Bold" Width="126" Background="#FF050505" Foreground="#FFFAF9F9"/>
+                        <Button Visibility="Collapsed"  x:Name="savePlanta" Content="Save Planta" HorizontalAlignment="Center" Margin="0,235,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_planta" FontWeight="Bold" Width="132" Background="#FF050505" Foreground="#FFFAF9F9"/>
+                        <Button Visibility="Collapsed"  x:Name="saveEscalera" Content="Save Escalera" HorizontalAlignment="Center" Margin="0,158,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_escalera" FontWeight="Bold" Width="144" Background="#FF050505" Foreground="#FFFAF9F9"/>
 
                     </Grid>
                 </TabItem>

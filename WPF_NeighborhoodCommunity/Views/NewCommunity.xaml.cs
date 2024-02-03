@@ -24,6 +24,14 @@ namespace WPF_NeighborhoodCommunity
     {
         private CommunityModelView modelCommunity = new CommunityModelView();
         private PortalModelView modelportalCommunity = new PortalModelView();
+        private StairsModelView modelstairCommunity = new StairsModelView();
+        private FloorModelView modelfloorCommunity = new FloorModelView();
+        private int contPortal = 1;
+        private int contStair = 1;
+        private int contFloor = 1;
+        private int idPortal = 0;
+        private int idStair = 0;
+        private int idFloor = 0;
         public NewCommunity()
         {
             InitializeComponent();
@@ -111,14 +119,21 @@ namespace WPF_NeighborhoodCommunity
         }
         private void Button_Save_portal(object sender, RoutedEventArgs e)
         {
-            CreatePortal();
+            if (modelportalCommunity.NumEscaleras != 0)
+            {
+                CreatePortal();
+                comboBoxEscalera.Visibility = Visibility.Visible;
+                ComboBoxEscalera();
+                DataContext = modelstairCommunity;
+                savePortal.Visibility = Visibility.Collapsed;
+            }
+            
         }
         private void CreatePortal()
         {
             int idComun = modelportalCommunity.GetIdComunidadByName(modelCommunity.Name);
             modelportalCommunity.IdComunidad = idComun;
-            for (int i = 1; i < modelCommunity.NumPortales; i++)
-            {
+                modelportalCommunity.NumPortal= contPortal;
                 Portal portal = new Portal
                 {
                     IdComunidad = modelportalCommunity.IdComunidad,
@@ -130,12 +145,15 @@ namespace WPF_NeighborhoodCommunity
                     modelportalCommunity.ListPortales = new ObservableCollection<Portal>();
                 }
                 modelportalCommunity.ListPortales.Add(portal);
-                modelportalCommunity.NewPortal();
-            }
-
+                idPortal = modelportalCommunity.NewPortal();
+            contPortal++;
         }
+
         private void ComboBoxPortal()
         {
+            int selectedIndex = comboBoxPortales.SelectedIndex;
+
+            comboBoxPortales.ItemsSource = null;
             comboBoxPortales.Items.Clear();
 
             List<string> portalNames = new List<string>();
@@ -144,8 +162,25 @@ namespace WPF_NeighborhoodCommunity
             {
                 portalNames.Add("Portal " + i);
             }
+
+            // Elimina la opción seleccionada previamente
+            if (selectedIndex != -1)
+            {
+                portalNames.RemoveAt(selectedIndex);
+            }
+
             comboBoxPortales.ItemsSource = portalNames;
+
+            // Restablece la selección a ningún índice
+            comboBoxPortales.SelectedIndex = -1;
+
+            // Imprime información de depuración
+            Console.WriteLine("SelectedIndex: " + selectedIndex);
+            Console.WriteLine("NumPortales: " + modelCommunity.NumPortales);
         }
+
+
+
         private void ComboBoxPortalesChanged(object sender, SelectionChangedEventArgs e)
         {
             if (comboBoxPortales.SelectedItem != null)
@@ -153,34 +188,166 @@ namespace WPF_NeighborhoodCommunity
                 txtEcs.Visibility = Visibility.Visible;
                 txtEsca.Visibility = Visibility.Visible;
                 comboBoxPortales.IsEnabled = false;
+                savePortal.Visibility = Visibility.Visible;
             }
         }
+        private void ComboBoxEscalera()
+        {
+            int selectedIndex = comboBoxEscalera.SelectedIndex;
+
+            comboBoxEscalera.ItemsSource = null;
+            comboBoxEscalera.Items.Clear();
+
+            List<string> escaleraNames = new List<string>();
+
+            for (int i = 1; i <= modelportalCommunity.NumEscaleras; i++)
+            {
+                escaleraNames.Add("Escalera " + i);
+            }
+
+            // Elimina la opción seleccionada previamente
+            if (selectedIndex != -1)
+            {
+                escaleraNames.RemoveAt(selectedIndex);
+            }
+
+            comboBoxEscalera.ItemsSource = escaleraNames;
+
+            // Restablece la selección a ningún índice
+            comboBoxEscalera.SelectedIndex = -1;
+
+            // Imprime información de depuración
+            Console.WriteLine("SelectedIndex: " + selectedIndex);
+            Console.WriteLine("NumEscaleras: " + modelportalCommunity.NumEscaleras);
+        }
+
+
         private void Button_Save_escalera(object sender, RoutedEventArgs e)
         {
-            //CreateEscalera();
+            CreateEscalera();
+            comboBoxPlantas.Visibility = Visibility.Visible;
+            ComboBoxPlanta();
+            DataContext = modelfloorCommunity;
+            saveEscalera.Visibility = Visibility.Collapsed;
         }
 
         private void CreateEscalera()
         {
+            modelstairCommunity.NumEscalera = contStair;
+            modelstairCommunity.IdPortal = idPortal;
+            Stair escalera = new Stair
+            {
+                IdPortal = modelstairCommunity.IdPortal,
+                NumPlantas = modelstairCommunity.NumPlantas,
+                NumEscalera = modelstairCommunity.NumEscalera
+            };
 
+            if (modelstairCommunity.ListEscaleras == null)
+            {
+                modelstairCommunity.ListEscaleras = new ObservableCollection<Stair>();
+            }
+            modelstairCommunity.ListEscaleras.Add(escalera);
+            idStair = modelstairCommunity.NewStairs();
+            contStair++;
         }
 
         private void ComboBoxEscaleraChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (comboBoxEscalera.SelectedItem != null)
+            {
+                txtPlan.Visibility = Visibility.Visible;
+                txtPlant.Visibility = Visibility.Visible;
+                comboBoxEscalera.IsEnabled = false;
+                saveEscalera.Visibility = Visibility.Visible;
+            }
         }
+        private void ComboBoxPlanta()
+        {
+            List<string> plantaNames = new List<string>();
+
+            for (int i = 1; i <= modelstairCommunity.NumPlantas; i++)
+            {
+                plantaNames.Add("Planta " + i);
+            }
+
+            // Elimina la opción seleccionada previamente
+            if (comboBoxPlantas.SelectedIndex != -1)
+            {
+                plantaNames.RemoveAt(comboBoxPlantas.SelectedIndex);
+            }
+
+            comboBoxPlantas.ItemsSource = null;
+            comboBoxPlantas.Items.Clear();
+
+            comboBoxPlantas.ItemsSource = plantaNames;
+            comboBoxPlantas.SelectedIndex = -1;
+        }
+
         private void Button_Save_planta(object sender, RoutedEventArgs e)
         {
-            //CreatePlanta();
+            CreatePlanta();
+            ComboBoxPlanta();
+            comboBoxPlantas.IsEnabled = true;
+            savePlanta.Visibility = Visibility.Collapsed;
+            if (contFloor > modelstairCommunity.NumPlantas)
+            {
+                txtPiso.Visibility = Visibility.Collapsed;
+                txtPisoss.Visibility = Visibility.Collapsed;
+                comboBoxPlantas.Visibility = Visibility.Collapsed;
+                ComboBoxEscalera();
+                comboBoxEscalera.IsEnabled= true;
+                DataContext = modelstairCommunity;
+                contFloor = 1;
+                if (contStair > modelportalCommunity.NumEscaleras)
+                {
+                    txtPlan.Visibility = Visibility.Collapsed;
+                    txtPlant.Visibility = Visibility.Collapsed;
+                    comboBoxEscalera.Visibility = Visibility.Collapsed;
+                    comboBoxPortales.IsEnabled = true;
+                    DataContext = modelstairCommunity;
+                    ComboBoxPortal();
+                    contStair = 1;
+                    if (contPortal > modelCommunity.NumPortales)
+                    {
+                        DataContext = modelportalCommunity;
+                        comboBoxPortales.Visibility = Visibility.Collapsed;
+                        txtEcs.Visibility = Visibility.Collapsed;
+                    }
+                }
+
+            }
+
         }
 
         private void CreatePlanta()
         {
+            modelfloorCommunity.IdEscalera = idStair;
+            modelfloorCommunity.NumPlanta = contFloor;
 
+            Floor escalera = new Floor
+            {
+                IdEscalera = modelfloorCommunity.IdEscalera,
+                NumPlanta = modelfloorCommunity.NumPlanta,
+                NumLetras = modelfloorCommunity.NumLetras
+            };
+
+            if (modelfloorCommunity.ListPlantas == null)
+            {
+                modelfloorCommunity.ListPlantas = new ObservableCollection<Floor>();
+            }
+            modelfloorCommunity.ListPlantas.Add(escalera);
+            idFloor = modelfloorCommunity.NewFloor();
+            contFloor++;
         }
         private void ComboBoxPlantaChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (comboBoxPlantas.SelectedItem != null)
+            {
+                txtPiso.Visibility = Visibility.Visible;
+                txtPisoss.Visibility = Visibility.Visible;
+                comboBoxPlantas.IsEnabled = false;
+                savePlanta.Visibility = Visibility.Visible;
+            }
         }
         
     }
