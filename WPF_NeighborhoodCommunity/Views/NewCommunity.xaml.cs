@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using WPF_NeighborhoodCommunity.Models;
 using WPF_NeighborhoodCommunity.ViewModel;
+using WPF_NeighborhoodCommunity.Views;
 
 namespace WPF_NeighborhoodCommunity
 {
@@ -32,6 +34,8 @@ namespace WPF_NeighborhoodCommunity
         private int idPortal = 0;
         private int idStair = 0;
         private int idFloor = 0;
+        private int numTras = 1;
+        private int numParking = 1;
         List<string> plantaNames = new List<string>();
         List<string> escaleraNames = new List<string>();
         List<string> portalNames = new List<string>();
@@ -59,7 +63,8 @@ namespace WPF_NeighborhoodCommunity
             }
         }
 
-
+        //Si todo esta correcto guardaremos los datos en la base de datos, si ya existe se actualizará, se podría haber puesto que si existe que no se pueda crear
+        //Mejor actualizar por si en un futuro quieren poner piscina o algo
         private void Button_Save(object sender, RoutedEventArgs e)
         {
             if (!(string.IsNullOrEmpty(modelCommunity.Direccion) || modelCommunity.NumPortales <= 0 || modelCommunity.MetrosCuadrados <= 0))
@@ -120,15 +125,21 @@ namespace WPF_NeighborhoodCommunity
                 }
             }
         }
+        //Iremos paso a paso por lo que guardaremos portal, luego escalera, luego planta, luego si hay más portales repetira el proceso
         private void Button_Save_portal(object sender, RoutedEventArgs e)
         {
-            if (modelportalCommunity.NumEscaleras != 0)
+            if (modelportalCommunity.NumEscaleras > 0)
             {
                 CreatePortal();
                 comboBoxEscalera.Visibility = Visibility.Visible;
                 ComboBoxEscalera();
                 DataContext = modelstairCommunity;
                 savePortal.Visibility = Visibility.Collapsed;
+                txtEsca.IsEnabled = false;
+                MessageBox.Show("Guardado correctamente!, Pasaremos a guardar Escalera", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else {
+                MessageBox.Show("Ingrese un numero de escaleras mayor que 0", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
         }
@@ -197,7 +208,6 @@ namespace WPF_NeighborhoodCommunity
                     escaleraNames.Add("Escalera " + i);
                 }
             }
-            // Elimina la opción seleccionada previamente
             if (comboBoxEscalera.SelectedIndex != -1)
             {
                 escaleraNames.RemoveAt(comboBoxEscalera.SelectedIndex);
@@ -213,11 +223,19 @@ namespace WPF_NeighborhoodCommunity
 
         private void Button_Save_escalera(object sender, RoutedEventArgs e)
         {
-            CreateEscalera();
-            comboBoxPlantas.Visibility = Visibility.Visible;
-            ComboBoxPlanta();
-            DataContext = modelfloorCommunity;
-            saveEscalera.Visibility = Visibility.Collapsed;
+            if (modelstairCommunity.NumPlantas > 0) {
+                CreateEscalera();
+                comboBoxPlantas.Visibility = Visibility.Visible;
+                ComboBoxPlanta();
+                txtPlant.IsEnabled = false;
+                DataContext = modelfloorCommunity;
+                saveEscalera.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Guardado correctamente!, Pasaremos a guardar Planta", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }   
+            else
+            {
+                MessageBox.Show("Ingrese un numero de plantas mayor que 0", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void CreateEscalera()
@@ -254,7 +272,7 @@ namespace WPF_NeighborhoodCommunity
         {
             if (plantaNames.Count <= 0)
             {
-                for (int i = 1; i <= modelstairCommunity.NumPlantas; i++)
+                for (int i = 0; i < modelstairCommunity.NumPlantas; i++)
                 {
                     plantaNames.Add("Planta " + i);
                 }
@@ -277,41 +295,54 @@ namespace WPF_NeighborhoodCommunity
 
         private void Button_Save_planta(object sender, RoutedEventArgs e)
         {
-            CreatePlanta();
-            ComboBoxPlanta();
-            comboBoxPlantas.IsEnabled = true;
-            savePlanta.Visibility = Visibility.Collapsed;
-            if (contFloor > modelstairCommunity.NumPlantas)
+            if (modelfloorCommunity.NumLetras >= 0)
             {
-                txtPiso.Visibility = Visibility.Collapsed;
-                txtPisoss.Visibility = Visibility.Collapsed;
-                comboBoxPlantas.Visibility = Visibility.Collapsed;
-                ComboBoxEscalera();
-                comboBoxEscalera.IsEnabled= true;
-                DataContext = modelstairCommunity;
-                contFloor = 1;
-                if (contStair > modelportalCommunity.NumEscaleras)
+                CreatePlanta();
+                ComboBoxPlanta();
+                comboBoxPlantas.IsEnabled = true;
+                savePlanta.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Guardado correctamente!,", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (contFloor > modelstairCommunity.NumPlantas)
                 {
-                    txtPlan.Visibility = Visibility.Collapsed;
-                    txtPlant.Visibility = Visibility.Collapsed;
-                    comboBoxEscalera.Visibility = Visibility.Collapsed;
-                    comboBoxPortales.IsEnabled = true;
-                    DataContext = modelportalCommunity;
-                    ComboBoxPortal();
-                    contStair = 1;
-                    if (contPortal > modelCommunity.NumPortales)
+                    txtPiso.Visibility = Visibility.Collapsed;
+                    txtPisoss.Visibility = Visibility.Collapsed;
+                    comboBoxPlantas.Visibility = Visibility.Collapsed;
+                    ComboBoxEscalera();
+                    comboBoxEscalera.IsEnabled = true;
+                    txtPlant.IsEnabled = true;
+                    DataContext = modelstairCommunity;
+                    contFloor = 1;
+                    if (contStair > modelportalCommunity.NumEscaleras)
                     {
+                        txtPlan.Visibility = Visibility.Collapsed;
+                        txtPlant.Visibility = Visibility.Collapsed;
+                        comboBoxEscalera.Visibility = Visibility.Collapsed;
+                        comboBoxPortales.IsEnabled = true;
+                        txtEsca.IsEnabled = true;
                         DataContext = modelportalCommunity;
-                        comboBoxPortales.Visibility = Visibility.Collapsed;
-                        txtEcs.Visibility = Visibility.Collapsed;
-                        txtEsca.Visibility = Visibility.Collapsed;
+                        ComboBoxPortal();
+                        contStair = 1;
+                        if (contPortal > modelCommunity.NumPortales)
+                        {
+                            DataContext = modelportalCommunity;
+                            comboBoxPortales.Visibility = Visibility.Collapsed;
+                            txtEcs.Visibility = Visibility.Collapsed;
+                            txtEsca.Visibility = Visibility.Collapsed;
+                            MessageBox.Show("Guardado correctamente el portal entero!, Ahora puedes crear los propietarios de este portal", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+                            txtCreada.Visibility = Visibility.Visible;
+                            btnMenu.Visibility = Visibility.Visible;
+                            btnProp.Visibility = Visibility.Visible;
+                        }
                     }
+
                 }
-
             }
-
+            else
+            {
+                MessageBox.Show("Ingrese un numero de letras de Pisos mayor que 0", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
+        //Cuando guardamos piso, le asociamos un parking y un trastero
         private void CreatePlanta()
         {
             modelfloorCommunity.IdEscalera = idStair;
@@ -324,6 +355,7 @@ namespace WPF_NeighborhoodCommunity
                 NumLetras = modelfloorCommunity.NumLetras
             };
 
+
             if (modelfloorCommunity.ListPlantas == null)
             {
                 modelfloorCommunity.ListPlantas = new ObservableCollection<Floor>();
@@ -331,7 +363,46 @@ namespace WPF_NeighborhoodCommunity
             modelfloorCommunity.ListPlantas.Add(escalera);
             idFloor = modelfloorCommunity.NewFloor();
             contFloor++;
+            char letraInicial = 'A';
+
+            for (int i = 0; i < modelfloorCommunity.NumLetras; i++)
+            {
+                PisoViewModel pisoViewModel = new PisoViewModel
+                {
+                    Letra = (char)(letraInicial + i),
+                    IdParking = CrearNuevoParking(),
+                    IdTrastero = CrearNuevoTrastero(),
+                    IdPlanta = idFloor
+                };
+
+                pisoViewModel.NewPiso();
+                
+            }
         }
+        private int CrearNuevoParking()
+        {
+            ParkingModelView parkingViewModel = new ParkingModelView
+            {
+                NumeroParking = numParking
+            };
+            numParking++;
+
+            return parkingViewModel.NewParking();
+        }
+
+        private int CrearNuevoTrastero()
+        {
+            BoxroomModelView boxroomViewModel = new BoxroomModelView
+            {
+                NumeroTrastero = numTras
+            };
+            numTras++;
+
+            return boxroomViewModel.NewTrastero();
+        }
+
+
+
         private void ComboBoxPlantaChanged(object sender, SelectionChangedEventArgs e)
         {
             if (comboBoxPlantas.SelectedItem != null)
@@ -356,15 +427,27 @@ namespace WPF_NeighborhoodCommunity
                 }
                 else
                 {
-                    throw new InvalidOperationException("No se pudo extraer el número del ComboBox.");
+                    throw new InvalidOperationException("No se pudo extraer el número del ComboBox");
                 }
             }
             else
             {
-                throw new InvalidOperationException("No hay nada seleccionado en el ComboBox.");
+                throw new InvalidOperationException("No hay nada seleccionado en el ComboBox");
             }
         }
 
+        private void btnPropietarios(object sender, RoutedEventArgs e)
+        {
+            NewOwner ownerWindow = new NewOwner();
+            ownerWindow.Show();
+            this.Close();
+        }
+        private void btnMen(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
 
     }
 }

@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Label Content="NEIGHBORHOOD ASSOCIATION" HorizontalAlignment="Center" Margin="0,46,0,0" VerticalAlignment="Top" Height="55" Width="504" FontFamily="Bahnschrift SemiBold" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
-        <Button Content="New community" Click="btnOpenNewCommunity" HorizontalAlignment="Left" Margin="284,147,0,0" VerticalAlignment="Top" Height="52" Width="204" FontFamily="Bahnschrift SemiBold" FontWeight="Bold" FontSize="18"/>
-        <Button Content="List Community" HorizontalAlignment="Left" Margin="302,217,0,0" VerticalAlignment="Top" Height="59" Width="168" FontFamily="Bahnschrift SemiBold" FontSize="18" FontWeight="Bold"/>
-        <Button Content="New owner" HorizontalAlignment="Left" Margin="302,300,0,0" VerticalAlignment="Top" Height="59" Width="168" FontFamily="Bahnschrift SemiBold" FontSize="18"/>
+        <Image Margin="0,5,308,5" Source="/Views/portada.jpg"  Stretch="Fill"/>
+        <Label Content="NEIGHBORHOOD &#xD;&#xA;   ASSOCIATION" HorizontalAlignment="Left" Margin="448,10,0,0" VerticalAlignment="Top" Height="103" Width="293" FontFamily="Bahnschrift SemiBold" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
+        <Button Content="New community" Click="btnOpenNewCommunity" HorizontalAlignment="Left" Margin="492,147,0,0" VerticalAlignment="Top" Height="52" Width="204" FontFamily="Bahnschrift SemiBold" FontWeight="Bold" FontSize="18"/>
+        <Button Content="List Community" Click="btnListCommunity" HorizontalAlignment="Left" Margin="510,217,0,0" VerticalAlignment="Top" Height="59" Width="168" FontFamily="Bahnschrift SemiBold" FontSize="18" FontWeight="Bold"/>
+        <Button Content="New owner" Click="btnOpenNewOwner" HorizontalAlignment="Left" Margin="510,306,0,0" VerticalAlignment="Top" Height="59" Width="168" FontFamily="Bahnschrift SemiBold" FontSize="18"/>
+
 
     </Grid>
 </Window>

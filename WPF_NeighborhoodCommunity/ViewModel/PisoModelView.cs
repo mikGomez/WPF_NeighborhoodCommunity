@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
+using System.Xml.Linq;
 using WPF_NeighborhoodCommunity.DB;
 using WPF_NeighborhoodCommunity.Models;
 
@@ -90,7 +92,85 @@ namespace WPF_NeighborhoodCommunity.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        //HAcemos una consulta para sacar el total de portales
+        public int totalPortales(string nameComunidad)
+        {
+            string SQL = $"SELECT MAX(numPortal) FROM portal WHERE idcomunidad = (SELECT idcomunidad FROM comunidad WHERE name = '{nameComunidad}');";
+            object numPortal = MySQLDataManagement.ExecuteScalar(SQL, cnstr);
 
+            if (numPortal != null && numPortal != DBNull.Value)
+            {
+                return Convert.ToInt32(numPortal);
+            }
+            else
+            {
+                return 0; 
+            }
+        }
+
+        //Consulta para sacar total de escaleras, se podria hacer con un COUNt tambien
+        public int totalEscaleras(int numPortal, string nombreComun)
+        {
+            
+            string SQL = $"SELECT numEscaleras FROM portal WHERE numPortal = {numPortal} AND idComunidad IN(SELECT idComunidad FROM comunidad WHERE name = '{nombreComun}');";
+            object numEsca = MySQLDataManagement.ExecuteScalar(SQL, cnstr);
+
+            if (numEsca != null && numEsca != DBNull.Value)
+            {
+                return Convert.ToInt32(numEsca);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        //Consulta para sacar el total de plantas
+        public int totalPlantas(int numPortal, int numEscalera, string nombreComunidad)
+        {
+            string SQL = $@"SELECT e.numPlantas
+                    FROM portal AS p
+                    INNER JOIN escalera AS e ON p.idportal = e.idPortal
+                    INNER JOIN planta AS pl ON e.idEscalera = pl.idEscalera
+                    WHERE p.numPortal = {numPortal}
+                    AND e.numEscalera = {numEscalera}
+                    AND p.idComunidad = (SELECT idcomunidad FROM comunidad WHERE name = '{nombreComunidad}');";
+
+            object numPlantas = MySQLDataManagement.ExecuteScalar(SQL, cnstr);
+
+            if (numPlantas != null && numPlantas != DBNull.Value)
+            {
+                return Convert.ToInt32(numPlantas);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        //Consulta para sacar total pisos pero como esta por letras, para no liarnos
+        public int totalLetras(int numPortal, int numEscalera,int numPlanta, string nombreComunidad)
+        {
+            string SQL = $@"
+                SELECT pl.numLetras
+                FROM portal AS p
+                INNER JOIN escalera AS e ON p.idportal = e.idPortal
+                INNER JOIN planta AS pl ON e.idEscalera = pl.idEscalera
+                WHERE p.numPortal = {numPortal}
+                AND e.numEscalera = {numEscalera}
+                AND pl.numPlanta = {numPlanta}
+                AND p.idComunidad = (SELECT idcomunidad FROM comunidad WHERE name = '{nombreComunidad}');";
+
+            object numLetras = MySQLDataManagement.ExecuteScalar(SQL, cnstr);
+
+            if (numLetras != null && numLetras != DBNull.Value)
+            {
+                return Convert.ToInt32(numLetras);
+            }
+            else
+            {
+                return 0;
+            }
+        }
         public int NewPiso()
         {
             string SQL = $"INSERT INTO piso (letra, idParking, idTrastero, idPlanta) " +

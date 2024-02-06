@@ -235,7 +235,7 @@ namespace WPF_NeighborhoodCommunity.ViewModel
             }
             if (dt.Rows.Count > 0)
             {
-                // Cambiamos para recorrer las filas, y asignar según la posición donde esté
+                // Cambiamos para recorrer las filas, y asignar según la posición donde este
                 foreach (DataRow i in dt.Rows)
                 {
                     ListComunidad.Add(new Community
@@ -245,14 +245,14 @@ namespace WPF_NeighborhoodCommunity.ViewModel
                         NumPortales = int.Parse(i[2].ToString()),
                         FechaCreacion = DateTime.Parse(i[3].ToString()),
                         MetrosCuadrados = decimal.Parse(i[4].ToString()),
-                        Piscina = i[5].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
-                        PisoPortero = i[6].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
-                        Duchas = i[7].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
-                        Parque = i[8].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
-                        MaquinasEjercicio = i[9].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
-                        SalaReuniones = i[10].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
-                        PistaTenis= i[11].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
-                        PistaPadel = i[12].ToString().Equals("True", StringComparison.OrdinalIgnoreCase) ? true : false,
+                        Piscina = Convert.ToBoolean(i[5]),
+                        PisoPortero = Convert.ToBoolean(i[6]),
+                        Duchas = Convert.ToBoolean(i[7]),
+                        Parque = Convert.ToBoolean(i[8]),
+                        MaquinasEjercicio = Convert.ToBoolean(i[9]),
+                        SalaReuniones = Convert.ToBoolean(i[10]),
+                        PistaTenis = Convert.ToBoolean(i[11]),
+                        PistaPadel = Convert.ToBoolean(i[12]),
                         Name = i[13].ToString()
                     });
                 }
