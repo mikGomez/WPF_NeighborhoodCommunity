@@ -1,4 +1,5 @@
-﻿<Window x:Class="WPF_NeighborhoodCommunity.NewCommunity"
+﻿<mah:MetroWindow x:Class="WPF_NeighborhoodCommunity.NewCommunity"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +7,41 @@
         xmlns:local="clr-namespace:WPF_NeighborhoodCommunity"
         mc:Ignorable="d"
         Title="NewCommunity" Height="450" Width="800">
+
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="FontFamily" Value="Bahnschrift SemiBold"/>
+                <Setter Property="FontSize" Value="48"/>
+                <Setter Property="FontStyle" Value="Italic"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="#007ACC"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Padding" Value="10,5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Bahnschrift SemiBold"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="#007ACC"/>
+                <Setter Property="Margin" Value="0,0,-2,2"/>
+            </Style>
+        </Grid.Resources>
         <Grid Margin="0,0,0,360">
             <Label Content="NEW COMMUNITY" HorizontalAlignment="Center" VerticalAlignment="Center" Height="54" Width="304" FontFamily="Bahnschrift SemiBold" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
         </Grid>
@@ -26,26 +61,27 @@
                         <TextBox HorizontalAlignment="Left" Name="metros" Margin="186,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63" Text="{Binding MetrosCuadrados, Mode=TwoWay}" Height="27"/>
                         <TextBlock HorizontalAlignment="Left" Margin="254,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" Height="29"><Run Language="es-es" Text="m2"/></TextBlock>
                         <Label Content="COMMUNITY " HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Height="55" Width="216" FontFamily="Bahnschrift SemiBold" FontSize="36" FontWeight="Bold" FontStyle="Italic"/>
-                        <Button Content="Next" Click="Button_Next" HorizontalAlignment="Left" Margin="272,231,0,0" VerticalAlignment="Top" Background="#FF050505" Foreground="#FFFAF9F9" Width="86" Height="38"/>
+                        <Button Content="Next" Click="Button_Next" HorizontalAlignment="Left" Margin="275,238,0,0" VerticalAlignment="Top" Width="83" Height="31" FontSize="22"/>
                         <TextBlock HorizontalAlignment="Left" Margin="61,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Text="Name:"/>
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="SpecificCommunity"  Header="Specific Community" IsEnabled="False" FontSize="20" Margin="-2,-2,0,2">
                     <Grid Margin="0,0,0,1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="401*"/>
+                            <ColumnDefinition Width="79*"/>
+                            <ColumnDefinition Width="322*"/>
                             <ColumnDefinition Width="245*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Content="Save" HorizontalAlignment="Left" Margin="282,239,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save" FontWeight="Bold" Width="82" Background="#FF050505" Foreground="#FFFAF9F9"/>
-                        <CheckBox Content="Pool" HorizontalAlignment="Left" Margin="69,88,0,0" VerticalAlignment="Top" Width="71" IsChecked="{Binding Piscina, Mode=TwoWay}"/>
-                        <CheckBox Content="Playground area :" HorizontalAlignment="Left" Margin="69,122,0,0" VerticalAlignment="Top" Width="190"  Height="26" IsChecked="{Binding Parque, Mode=TwoWay}"/>
-                        <CheckBox Content=" Exercise machines :" HorizontalAlignment="Left" Margin="69,153,0,0" VerticalAlignment="Top" Width="223"  Height="26" IsChecked="{Binding MaquinasEjercicio, Mode=TwoWay}"/>
-                        <CheckBox Content="Tennis court :" HorizontalAlignment="Left" Margin="69,184,0,0" VerticalAlignment="Top" Width="223" Height="26" IsChecked="{Binding PistaTenis, Mode=TwoWay}"/>
-                        <CheckBox Content="Floor for the doorman :" HorizontalAlignment="Left" Margin="376,88,0,0" VerticalAlignment="Top" Width="268"  Height="26" IsChecked="{Binding PisoPortero, Mode=TwoWay}" Grid.ColumnSpan="2"/>
-                        <CheckBox Content="Community showers :" HorizontalAlignment="Left" Margin="376,122,0,0" VerticalAlignment="Top" Width="216"  Height="26" IsChecked="{Binding Duchas, Mode=TwoWay}" Grid.ColumnSpan="2"/>
-                        <CheckBox Content="Meeting room :" HorizontalAlignment="Left" Margin="376,153,0,0" VerticalAlignment="Top" Width="216"  Height="26" IsChecked="{Binding SalaReuniones, Mode=TwoWay}" Grid.ColumnSpan="2"/>
-                        <CheckBox Content="Paddle court :" HorizontalAlignment="Left" Margin="376,184,0,0" VerticalAlignment="Top" Width="216" Height="26" FontSize="20" IsChecked="{Binding PistaPadel,Mode=TwoWay}" Grid.ColumnSpan="2"/>
-                        <Label Content="COMMUNITY " HorizontalAlignment="Left" Margin="215,10,0,0" VerticalAlignment="Top" Height="55" Width="216" FontFamily="Bahnschrift SemiBold" FontSize="36" FontWeight="Bold" FontStyle="Italic" Grid.ColumnSpan="2"/>
+                        <Button Content="Save" HorizontalAlignment="Left" Margin="203,242,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save" FontWeight="Bold" Width="82" Height="31" Grid.Column="1" FontSize="24"/>
+                        <CheckBox Content="Pool" HorizontalAlignment="Left" Margin="69,88,0,0" VerticalAlignment="Top" Width="71" IsChecked="{Binding Piscina, Mode=TwoWay}" Grid.ColumnSpan="2"/>
+                        <CheckBox Content="Playground area :" HorizontalAlignment="Left" Margin="69,122,0,0" VerticalAlignment="Top" Width="190"  Height="26" IsChecked="{Binding Parque, Mode=TwoWay}" Grid.ColumnSpan="2"/>
+                        <CheckBox Content=" Exercise machines :" HorizontalAlignment="Left" Margin="69,153,0,0" VerticalAlignment="Top" Width="223"  Height="26" IsChecked="{Binding MaquinasEjercicio, Mode=TwoWay}" Grid.ColumnSpan="2"/>
+                        <CheckBox Content="Tennis court :" HorizontalAlignment="Left" Margin="69,184,0,0" VerticalAlignment="Top" Width="223" Height="26" IsChecked="{Binding PistaTenis, Mode=TwoWay}" Grid.ColumnSpan="2"/>
+                        <CheckBox Content="Floor for the doorman :" HorizontalAlignment="Left" Margin="297,88,0,0" VerticalAlignment="Top" Width="268"  Height="26" IsChecked="{Binding PisoPortero, Mode=TwoWay}" Grid.ColumnSpan="2" Grid.Column="1"/>
+                        <CheckBox Content="Community showers :" HorizontalAlignment="Left" Margin="297,122,0,0" VerticalAlignment="Top" Width="216"  Height="26" IsChecked="{Binding Duchas, Mode=TwoWay}" Grid.ColumnSpan="2" Grid.Column="1"/>
+                        <CheckBox Content="Meeting room :" HorizontalAlignment="Left" Margin="297,153,0,0" VerticalAlignment="Top" Width="216"  Height="26" IsChecked="{Binding SalaReuniones, Mode=TwoWay}" Grid.ColumnSpan="2" Grid.Column="1"/>
+                        <CheckBox Content="Paddle court :" HorizontalAlignment="Left" Margin="297,184,0,0" VerticalAlignment="Top" Width="216" Height="26" IsChecked="{Binding PistaPadel,Mode=TwoWay}" Grid.ColumnSpan="2" Grid.Column="1"/>
+                        <Label Content="COMMUNITY " HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top" Height="55" Width="216" FontFamily="Bahnschrift SemiBold" FontSize="36" FontWeight="Bold" FontStyle="Italic" Grid.ColumnSpan="2" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="Portal"  Header="Portal" IsEnabled="False" FontSize="20" Margin="-2,-2,0,2">
@@ -59,15 +95,15 @@
                         <ComboBox Visibility="Collapsed" SelectionChanged="ComboBoxPlantaChanged" x:Name="comboBoxPlantas" Margin="117,158,379,92" />
                         <TextBlock Visibility="Collapsed"  x:Name="txtPiso" HorizontalAlignment="Left" Margin="117,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="271"><Run Text="Nº Letras que tiene la planta: "/></TextBlock>
                         <TextBox Visibility="Collapsed" x:Name="txtPisoss"  HorizontalAlignment="Left" Margin="388,203,0,0" TextWrapping="Wrap" Text="{Binding NumLetras, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
-                        <Button Visibility="Collapsed"  x:Name="savePortal" Content="Save Portal" HorizontalAlignment="Center" Margin="0,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_portal" FontWeight="Bold" Width="126" Background="#FF050505" Foreground="#FFFAF9F9"/>
-                        <Button Visibility="Collapsed"  x:Name="savePlanta" Content="Save Planta" HorizontalAlignment="Center" Margin="0,235,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_planta" FontWeight="Bold" Width="132" Background="#FF050505" Foreground="#FFFAF9F9"/>
-                        <Button Visibility="Collapsed"  x:Name="saveEscalera" Content="Save Escalera" HorizontalAlignment="Center" Margin="0,158,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_escalera" FontWeight="Bold" Width="144" Background="#FF050505" Foreground="#FFFAF9F9"/>
+                        <Button Visibility="Collapsed"  x:Name="savePortal" Content="Save Portal" HorizontalAlignment="Center" Margin="0,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_portal" FontWeight="Bold" Width="126" FontSize="22"/>
+                        <Button Visibility="Collapsed"  x:Name="savePlanta" Content="Save Planta" HorizontalAlignment="Center" Margin="0,235,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_planta" FontWeight="Bold" Width="132" FontSize="22"/>
+                        <Button Visibility="Collapsed"  x:Name="saveEscalera" Content="Save Escalera" HorizontalAlignment="Center" Margin="0,158,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.136,-0.332" Click="Button_Save_escalera" FontWeight="Bold" Width="144" FontSize="22" />
                         <TextBlock Visibility="Collapsed" x:Name="txtCreada"  HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="COMUNIDAD CREADA" VerticalAlignment="Top" Width="524" Height="68" FontWeight="Bold" FontSize="40" FontFamily="ROG Fonts"/>
-                        <Button Visibility="Collapsed" x:Name="btnProp" Click="btnPropietarios"  Content="Pincha para crear propietarios" HorizontalAlignment="Center" Margin="0,83,0,0" VerticalAlignment="Top" Width="288" Height="74" Background="#FF080808" Foreground="#FFF9F6F6" FontFamily="Reem Kufi"/>
-                        <Button Visibility="Collapsed" x:Name="btnMenu" Click="btnMen" Content="Pincha para salir al menu principal" HorizontalAlignment="Center" Margin="0,176,0,0" VerticalAlignment="Top" Width="313" Height="70" Background="#FFF7F7F7" FontFamily="Reem Kufi"/>
+                        <Button Visibility="Collapsed"  x:Name="btnProp" Click="btnPropietarios"  Content="Pincha para crear propietarios" HorizontalAlignment="Center" Margin="0,83,0,0" VerticalAlignment="Top" Width="313" Height="74" Background="#FF080808" Foreground="#FFF9F6F6" FontFamily="Reem Kufi" FontSize="22"/>
+                        <Button Visibility="Collapsed"  x:Name="btnMenu" Click="btnMen" Content="Pincha para salir al menu principal" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Width="366" Height="70" Background="#FFF7F7F7" Foreground="Black" FontFamily="Reem Kufi" FontSize="22"/>
                     </Grid>
                 </TabItem>
             </TabControl>
         </StackPanel>
     </Grid>
-</Window>
+</mah:MetroWindow>

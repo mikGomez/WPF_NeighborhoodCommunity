@@ -1,4 +1,5 @@
-﻿using Mysqlx.Crud;
+﻿using MahApps.Metro.Controls;
+using Mysqlx.Crud;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,7 +17,7 @@ namespace WPF_NeighborhoodCommunity
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {

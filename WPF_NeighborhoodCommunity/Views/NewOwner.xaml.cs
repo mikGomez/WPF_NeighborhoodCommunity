@@ -1,4 +1,5 @@
-﻿using Mysqlx.Crud;
+﻿using MahApps.Metro.Controls;
+using Mysqlx.Crud;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,7 +20,7 @@ using WPF_NeighborhoodCommunity.ViewModel;
 
 namespace WPF_NeighborhoodCommunity.Views
 {
-    public partial class NewOwner : Window
+    public partial class NewOwner : MetroWindow
     {
         PisoViewModel pisoModelView = new PisoViewModel();
         PropietarioModelView propietariomodelView = new PropietarioModelView();
@@ -220,6 +221,12 @@ namespace WPF_NeighborhoodCommunity.Views
         {
             ListCommunity community = new ListCommunity();
             community.Show();
+        }
+        private void volverMenu(object sender, RoutedEventArgs e)
+        {
+            MainWindow community = new MainWindow();
+            community.Show();
+            this.Close();
         }
     }
 }

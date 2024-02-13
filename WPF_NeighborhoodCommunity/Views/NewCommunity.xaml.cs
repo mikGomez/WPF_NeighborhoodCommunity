@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,7 +23,7 @@ using WPF_NeighborhoodCommunity.Views;
 namespace WPF_NeighborhoodCommunity
 {
 
-    public partial class NewCommunity : Window
+    public partial class NewCommunity : MetroWindow
     {
         private CommunityModelView modelCommunity = new CommunityModelView();
         private PortalModelView modelportalCommunity = new PortalModelView();

@@ -198,6 +198,13 @@ namespace WPF_NeighborhoodCommunity.ViewModel
             
             MySQLDataManagement.ExecuteNonQuery(SQL, cnstr);
         }
+        public void DeleteComunidad(String nameC)
+        {
+
+            String SQL = $"DELETE FROM comunidad WHERE name = '{nameC}'";
+
+            MySQLDataManagement.ExecuteNonQuery(SQL, cnstr);
+        }
 
         public void UpdateCommunity()
         {
