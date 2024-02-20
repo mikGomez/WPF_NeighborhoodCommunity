@@ -1,5 +1,4 @@
-﻿using CrystalDecisions.CrystalReports.Engine;
-using MahApps.Metro.Controls;
+﻿using MahApps.Metro.Controls;
 using Mysqlx.Crud;
 using System.Text;
 using System.Windows;
@@ -12,7 +11,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF_NeighborhoodCommunity.Views;
-
 
 namespace WPF_NeighborhoodCommunity
 {
@@ -44,6 +42,9 @@ namespace WPF_NeighborhoodCommunity
             this.Close();
         }
 
+        private void btnOpenNewInf(object sender, RoutedEventArgs e)
+        {
 
-
+        }
+    }
 }
