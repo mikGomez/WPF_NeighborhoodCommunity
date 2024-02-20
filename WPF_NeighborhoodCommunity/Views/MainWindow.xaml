@@ -45,9 +45,10 @@
 
         <Label Content=" Comunidad&#xD;&#xA;    Vecinos" HorizontalAlignment="Left" Margin="448,10,0,0" VerticalAlignment="Top" Height="119" Width="320"/>
 
-        <Button Content="Nueva Comunidad" Click="btnOpenNewCommunity" HorizontalAlignment="Left" VerticalAlignment="Top" Height="52" Width="204" Margin="492,160,0,0"/>
-        <Button Content="Lista Comunidad" Click="btnListCommunity" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Width="168" Margin="510,240,0,0"/>
-        <Button Content="Nuevo Propietario" Click="btnOpenNewOwner" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Width="186" Margin="501,326,0,0"/>
+        <Button Content="Nueva Comunidad" Click="btnOpenNewCommunity" HorizontalAlignment="Left" VerticalAlignment="Top" Height="52" Width="204" Margin="492,134,0,0"/>
+        <Button Content="Lista Comunidad" Click="btnListCommunity" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Width="168" Margin="510,198,0,0"/>
+        <Button Content="Nuevo Propietario" Click="btnOpenNewOwner" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Width="186" Margin="501,273,0,0"/>
+        <Button Content="Hacer informe" Click="btnOpenNewInf" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Width="186" Margin="501,349,0,0"/>
 
     </Grid>
 </mah:MetroWindow>
