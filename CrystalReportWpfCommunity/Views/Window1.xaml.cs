@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace CrystalReportWpfCommunity
         {
             InitializeComponent();
             reportViewer.Owner = this;
+            ReportDocument report = new ReportDocument();
+            string path = "..\\..\\Report\\CrystalReport1.rpt";
+            report.Load(path);
+            report.Refresh();
+            reportViewer.ViewerCore.ReportSource = report;
         }
     }
 }

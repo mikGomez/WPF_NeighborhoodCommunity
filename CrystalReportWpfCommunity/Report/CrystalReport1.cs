@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CrystalReportWpfCommunity {
+namespace CrystalReportWpfCommunity.Report {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -41,7 +41,7 @@ namespace CrystalReportWpfCommunity {
         
         public override string FullResourceName {
             get {
-                return "CrystalReportWpfCommunity.CrystalReport1.rpt";
+                return "CrystalReportWpfCommunity.Report.CrystalReport1.rpt";
             }
             set {
                 // Do nothing
