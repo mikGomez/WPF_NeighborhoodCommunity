@@ -27,7 +27,9 @@ namespace CrystalReportWpfCommunity
             ReportDocument report = new ReportDocument();
             string path = "..\\..\\Report\\CrystalReport1.rpt";
             report.Load(path);
-            report.Refresh();
+            //Lo dejo comentado ya que sino pide ID y contraseña
+
+            //report.Refresh();
             reportViewer.ViewerCore.ReportSource = report;
         }
     }
